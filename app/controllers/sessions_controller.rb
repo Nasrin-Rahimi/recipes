@@ -9,4 +9,9 @@ class SessionsController < ApplicationController
        redirect '/recipes'
     end
 
+    get '/logout' do
+        session.clear
+        redirect "/login"
+    end
+
 end
