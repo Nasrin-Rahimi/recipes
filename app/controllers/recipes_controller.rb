@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
 
     get '/recipes/new' do
         #checking if thay are logged in
-        if !session[:email]
+        if !logged_in?
             redirect "/login"
         else
             "A new recipe form"
