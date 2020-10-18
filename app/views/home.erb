@@ -1,10 +1,12 @@
-<div class="container">
  
-  <div class="col-md-8 col-md-offset-2">
+<div class="category-list" >
 
-    <div class="content">
-      <p>Welcome to Recipes! 
-    </div>
+  <% @categories.each do |category| %>
+    <ul>
+      <li> <a href="/categories/<%=category.id%>"><%= category.name%></a> </li>
+    </ul>
+  <% end %>
 
-  </div>
 </div>
+
+
