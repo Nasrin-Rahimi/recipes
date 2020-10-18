@@ -7,4 +7,5 @@ end
 use SessionsController
 use RecipesController
 use UsersController
+use CategoriesController
 run ApplicationController

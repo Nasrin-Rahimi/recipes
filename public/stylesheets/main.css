@@ -64,6 +64,10 @@
     color: black;
     text-align: right;
   }
+  .category-list{
+    background: black;
+    margin: 10px;
+  }
 
   h1 {
     font-size: 36px;
