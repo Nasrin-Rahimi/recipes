@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
     get '/recipes' do
-        # "You are logged in as #{session[:email]}"
+        # "You are logged in as #{session[:username]}"
         "A list of publically available Recipes."
     end
 

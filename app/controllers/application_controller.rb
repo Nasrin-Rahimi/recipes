@@ -10,20 +10,20 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    erb :home
   end
 
   helpers do
     
     def logged_in?
-      !!session[:email]
+      !!session[:username]
     end
 
-    def login(email, password)
-      #check if a user with this email exist and check password
-      user = User.find_by(:email => email)
+    def login(username, password)
+      #check if a user with this username exist and check password
+      user = User.find_by(:username => username)
       if user && user.authenticate(password)
-        session[:email] = user.email
+        session[:username] = user.username
       else
         redirect '/login'
       end
