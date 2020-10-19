@@ -44,6 +44,13 @@
     height: 50px;
     width: 50px;
   }
+
+  .recipe-categories{
+    height: 50px;
+    width: 50px;
+    text-align: right;
+  }
+
   }
 
   .main-navigation {
