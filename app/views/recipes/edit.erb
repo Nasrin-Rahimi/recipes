@@ -1,5 +1,9 @@
-# <form action="/tweets/<%= @tweet.id %>" method="POST">
-#     <input id="hidden" type="hidden" name="_method" value="patch" >
-#     <p>Content: <input type="text" name="content" value = "<%= @tweet.content %>"></p>
-#     <input type="submit" id="submit" value="Edit">
-# </form>
+<form action="/recipes/<%= @recipe.id %>" method="POST" id="edit_recipe">
+    <input id="hidden" type="hidden" name="_method" value="patch" >
+    <p>Name: <input type="text" name="name" value = "<%= @recipe.name %>"></p>
+    <p>Ingredients: <input type="text" name="ingredients" value = "<%= @recipe.ingredients %>"></p>
+    <p>Cook Time: <input type="text" name="cooktime" value = "<%= @recipe.cooktime %>"></p>
+    <textarea name="description" form="edit_recipe" rows="8" cols="120"><%= @recipe.description %></textarea>
+    <input type="submit" id="submit" value="Edit Recipe">
+</form>
+

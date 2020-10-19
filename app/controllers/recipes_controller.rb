@@ -28,13 +28,41 @@ class RecipesController < ApplicationController
             redirect "/login"
         else
             #find a recipe that only the author user is allowed to edit
-            if @recipe = current_user.recipes.find_by(params[:id])
+            if @recipe = current_user.recipes.find(params[:id])
                 # "An edit recipe from #{current_user.id} is editing #{recipe.id}"
+                
+                # erb :"/recipes/edit",  :layout => false
                 erb :"/recipes/edit"
             else 
                 redirect "/recipes"
             end
         end
     end
+
+    patch '/recipes/:id' do
+        if params[:name] == "" || params[:ingredients] == "" || params[:description] == ""
+            redirect "/recipes/#{params[:id]}/edit"
+        else
+            recipe = Recipe.find(params[:id])
+            recipe.name = params[:name]
+            recipe.ingredients = params[:ingredients]
+            recipe.cooktime = params[:cooktime]
+            recipe.description = params[:description]
+            recipe.save
+            redirect "/recipes/#{params[:id]}"
+        end
+    end
+
+    # delete '/tweets/:id' do
+    #     if logged_in?
+    #         if params[:id] == session[:user_id].to_s
+    #             tweet = Tweet.find(params[:id])
+    #             tweet.delete
+    #         end
+    #         redirect "/tweets"
+    #     else
+    #         redirect '/login'
+    #     end
+    # end
 
 end
