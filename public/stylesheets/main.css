@@ -68,6 +68,9 @@
     background: white;
     margin: 10px;
   }
+  .home-div{
+    text-align: center;
+  }
 
   h1 {
     font-size: 36px;

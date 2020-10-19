@@ -27,11 +27,11 @@ class RecipesController < ApplicationController
          if !logged_in?
             redirect "/login"
         else
-            #find a recipe that only the author user is allowed to edit
-            if @recipe = current_user.recipes.find(params[:id])
-                # "An edit recipe from #{current_user.id} is editing #{recipe.id}"
-                
-                # erb :"/recipes/edit",  :layout => false
+            #find a recipe that only the creator user is allowed to edit
+            #  binding.pry
+             @recipe = Recipe.find(params[:id])
+             if current_user.recipes.include?(@recipe)
+            # if @recipe = current_user.recipes.find_by(params[:id])
                 erb :"/recipes/edit"
             else 
                 redirect "/recipes"
