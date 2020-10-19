@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
             redirect "/login"
         else
             #find a recipe that only the creator user is allowed to edit
-            #  binding.pry
              @recipe = Recipe.find(params[:id])
              if current_user.recipes.include?(@recipe)
             # if @recipe = current_user.recipes.find_by(params[:id])
@@ -53,16 +52,16 @@ class RecipesController < ApplicationController
         end
     end
 
-    # delete '/tweets/:id' do
-    #     if logged_in?
-    #         if params[:id] == session[:user_id].to_s
-    #             tweet = Tweet.find(params[:id])
-    #             tweet.delete
-    #         end
-    #         redirect "/tweets"
-    #     else
-    #         redirect '/login'
-    #     end
-    # end
+    delete '/recipes/:id' do
+        if logged_in?
+            recipe = Recipe.find(params[:id])
+            if current_user.recipes.include?(recipe)
+                recipe.delete
+            end
+            redirect "/recipes"
+        else
+            redirect '/login'
+        end
+    end
 
 end
