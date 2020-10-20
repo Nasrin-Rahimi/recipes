@@ -16,14 +16,19 @@
   <body>
     <div class="wrapper">
       <nav class="main-navigation">
+      
         <a href="/"><img src="/images/site_logo_2.png" class="site-logo"></a>
-        <a href="/signup" class="nav-item">Signup</a>  |  
+      
         <% if !logged_in? %>
+          <a href="/signup" class="nav-item">Signup</a>  |  
           <a href="/login" class="nav-item">Login</a>    |
         <% else %>
-          <a href="/logout" class="nav-item">Logout</a>  |
+          <span>Hello <%= current_user.username %>! </span> |
+          <a href="/logout" class="nav-item"> Logout </a>  |
         <% end %>
-        <a href="/categories"><img src="/images/recipe_categories.jpg" class="recipe-categories"></a>
+
+        <a href="/categories"> Recipe Categories </a>
+
       </nav>
       <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header>
 
