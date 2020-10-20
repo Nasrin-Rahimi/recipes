@@ -7,6 +7,6 @@ ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
-
+require 'rack-flash'
 # require './app/controllers/application_controller'
 require_all 'app'

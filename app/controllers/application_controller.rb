@@ -2,6 +2,8 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
+  use Rack::Flash
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -38,6 +40,13 @@ class ApplicationController < Sinatra::Base
     def logout!
       session.clear
       #Emailing them to let them know they logged out
+    end
+
+    def authentication_required
+      if !logged_in?
+        flash[:notice] = "You must be logged in."
+        redirect '/'
+      end
     end
 
   end
