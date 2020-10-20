@@ -1,21 +1,15 @@
 class CategoriesController < ApplicationController
 
     get '/categories' do
-        if logged_in?
-            @categories = Category.all 
-            erb :"/categories/index"
-        else
-            redirect "/login"
-        end
+        authentication_required
+        @categories = Category.all 
+        erb :"/categories/index"
     end
 
     get '/categories/:id' do
-        if logged_in?
-            @category = Category.find(params[:id])
-            @recipes = Recipe.where("category_id = ?", @category.id)
-            erb :"/categories/show"
-        else
-            redirect "/login"
-        end
+        authentication_required
+        @category = Category.find(params[:id])
+        @recipes = Recipe.where("category_id = ?", @category.id)
+        erb :"/categories/show"
     end
 end

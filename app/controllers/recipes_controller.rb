@@ -2,23 +2,17 @@ class RecipesController < ApplicationController
 
     get '/recipes' do
         # "You are logged in as #{session[:username]}"
-        if logged_in?
-            @recipes = Recipe.all
-            erb :"/recipes/index"
-        else
-            redirect "/login"
-        end
+        authentication_required
+        @recipes = Recipe.all
+        erb :"/recipes/index"
+
     end
 
     get '/recipes/new' do
         #checking if thay are logged in
-        if !logged_in?
-            redirect "/login"
-        else
-            @categories = Category.all
-             erb :"recipes/new"
-        end
-
+        authentication_required
+        @categories = Category.all
+        erb :"recipes/new"
     end
 
     post '/recipes' do 
@@ -38,27 +32,21 @@ class RecipesController < ApplicationController
     end
 
     get '/recipes/:id' do
-        if logged_in?
-            @recipe = Recipe.find(params[:id])
-            erb :"/recipes/show"
-        else
-            redirect "/login"
-        end
+        authentication_required
+        @recipe = Recipe.find(params[:id])
+        erb :"/recipes/show"
     end
 
     get '/recipes/:id/edit' do
          #checking if they are logged in
-         if !logged_in?
-            redirect "/login"
-        else
-            #find a recipe that only the creator user is allowed to edit
-             @recipe = Recipe.find(params[:id])
-             if current_user.recipes.include?(@recipe)
-            # if @recipe = current_user.recipes.find_by(params[:id])
-                erb :"/recipes/edit"
-            else 
-                redirect "/categories"
-            end
+         authentication_required
+        #find a recipe that only the creator user is allowed to edit
+        @recipe = Recipe.find(params[:id])
+        if current_user.recipes.include?(@recipe)
+        # if @recipe = current_user.recipes.find_by(params[:id])
+            erb :"/recipes/edit"
+        else 
+            redirect "/categories"
         end
     end
 
@@ -77,15 +65,12 @@ class RecipesController < ApplicationController
     end
 
     delete '/recipes/:id' do
-        if logged_in?
-            recipe = Recipe.find(params[:id])
-            if current_user.recipes.include?(recipe)
-                recipe.delete
-            end
-            redirect "/recipes"
-        else
-            redirect '/login'
+        authentication_required
+        recipe = Recipe.find(params[:id])
+        if current_user.recipes.include?(recipe)
+            recipe.delete
         end
+        redirect "/recipes"
     end
 
 end
