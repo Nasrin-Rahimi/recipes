@@ -18,13 +18,11 @@ class RecipesController < ApplicationController
     end
 
     post '/recipes' do 
-          binding.pry
         @recipe = Recipe.create(params["recipe"])
         # @recipe.user = current_user
         if !params["category"]["name"].empty?
             @recipe.category = Category.create(name: params["category"]["name"])
-        # else
-        #     @recipe.category = Category.find()
+            @recipe.save
         end
     
         redirect "/recipes/#{@recipe.id}"

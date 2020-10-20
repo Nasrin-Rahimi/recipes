@@ -4,7 +4,7 @@
 <p>Description: <%= @recipe.description %> </p>
 
 
-<a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a><br>
+<a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a><br><br>
 
 <form action="/recipes/<%= @recipe.id %>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
