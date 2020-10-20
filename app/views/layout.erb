@@ -18,8 +18,11 @@
       <nav class="main-navigation">
         <a href="/"><img src="/images/site_logo_2.png" class="site-logo"></a>
         <a href="/signup" class="nav-item">Signup</a>  |  
-        <a href="/login" class="nav-item">Login</a>    |
-        <a href="/logout" class="nav-item">Logout</a>  |
+        <% if !logged_in? %>
+          <a href="/login" class="nav-item">Login</a>    |
+        <% else %>
+          <a href="/logout" class="nav-item">Logout</a>  |
+        <% end %>
         <a href="/categories"><img src="/images/recipe_categories.jpg" class="recipe-categories"></a>
       </nav>
       <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header>
