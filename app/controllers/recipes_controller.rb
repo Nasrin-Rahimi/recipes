@@ -2,8 +2,12 @@ class RecipesController < ApplicationController
 
     get '/recipes' do
         # "You are logged in as #{session[:username]}"
-        @recipes = Recipe.all
-        erb :"/recipes/index"
+        if logged_in?
+            @recipes = Recipe.all
+            erb :"/recipes/index"
+        else
+            redirect "/login"
+        end
     end
 
     get '/recipes/new' do
@@ -18,19 +22,28 @@ class RecipesController < ApplicationController
     end
 
     post '/recipes' do 
-        @recipe = Recipe.create(params["recipe"])
-        # @recipe.user = current_user
-        if !params["category"]["name"].empty?
-            @recipe.category = Category.create(name: params["category"]["name"])
-            @recipe.save
-        end
-    
-        redirect "/recipes/#{@recipe.id}"
+        #check if all fields are fill then create recipe
+        # if !params[:recipe][:name].empty?
+            @recipe = Recipe.create(params["recipe"])
+            # @recipe.user = current_user
+            if !params["category"]["name"].empty?
+                @recipe.category = Category.create(name: params["category"]["name"])
+                @recipe.save
+            end
+        
+            redirect "/recipes/#{@recipe.id}"
+        # else
+        #     redirect "/recipes/new"
+        # end
     end
 
     get '/recipes/:id' do
-        @recipe = Recipe.find(params[:id])
-        erb :"/recipes/show"
+        if logged_in?
+            @recipe = Recipe.find(params[:id])
+            erb :"/recipes/show"
+        else
+            redirect "/login"
+        end
     end
 
     get '/recipes/:id/edit' do
@@ -44,7 +57,7 @@ class RecipesController < ApplicationController
             # if @recipe = current_user.recipes.find_by(params[:id])
                 erb :"/recipes/edit"
             else 
-                redirect "/recipes"
+                redirect "/categories"
             end
         end
     end

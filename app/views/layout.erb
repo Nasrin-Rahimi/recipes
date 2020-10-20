@@ -24,11 +24,12 @@
           <a href="/login" class="nav-item">Login</a>    |
         <% else %>
           <span>Hello <%= current_user.username %>! </span> |
+          <a href="/categories"> Recipe Categories </a> |
           <a href="/recipes/new">New Recipe</a> |
           <a href="/logout" class="nav-item"> Logout </a>  |
         <% end %>
 
-        <a href="/categories"> Recipe Categories </a>
+        
 
       </nav>
       <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header>
