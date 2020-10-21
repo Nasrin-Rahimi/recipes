@@ -13,7 +13,6 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     @categories = Category.all
-    # flash[:notice] = "Hooray, Flash is working!"
     erb :home
   end
 
