@@ -29,7 +29,6 @@ class ApplicationController < Sinatra::Base
     end
 
     def login(username, password)
-      #check if a user with this username exist and check password
       user = User.find_by(:username => username)
       if user && user.authenticate(password)
         session[:username] = user.username
@@ -40,7 +39,6 @@ class ApplicationController < Sinatra::Base
 
     def logout!
       session.clear
-      #Emailing them to let them know they logged out
     end
 
     def authentication_required

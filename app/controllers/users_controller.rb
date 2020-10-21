@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     post '/signup' do
         @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
         if @user.valid?
+             #Emailing them to let them know they signed up
             redirect '/login'
         else
             erb :"/users/signup"

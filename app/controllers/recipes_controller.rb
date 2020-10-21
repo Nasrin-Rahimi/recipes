@@ -1,7 +1,6 @@
 class RecipesController < ApplicationController
 
     get '/recipes' do
-        # "You are logged in as #{session[:username]}"
         authentication_required
         @recipes = Recipe.all
         erb :"/recipes/index"
@@ -9,26 +8,23 @@ class RecipesController < ApplicationController
     end
 
     get '/recipes/new' do
-        #checking if thay are logged in
         authentication_required
         @categories = Category.all
         erb :"recipes/new"
     end
 
     post '/recipes' do 
-        #check if all fields are fill then create recipe
-        # if !params[:recipe][:name].empty?
-            @recipe = Recipe.create(params["recipe"])
-            # @recipe.user = current_user
-            if !params["category"]["name"].empty?
-                @recipe.category = Category.create(name: params["category"]["name"])
-                @recipe.save
-            end
-        
+        @recipe = Recipe.create(params["recipe"])
+        if !params["category"]["name"].empty?
+            @recipe.category = Category.create(name: params["category"]["name"])
+            @recipe.save
+        end
+        if @recipe.valid?
             redirect "/recipes/#{@recipe.id}"
-        # else
-        #     redirect "/recipes/new"
-        # end
+        else
+            @categories = Category.all
+            erb :"/recipes/new"
+        end
     end
 
     get '/recipes/:id' do
