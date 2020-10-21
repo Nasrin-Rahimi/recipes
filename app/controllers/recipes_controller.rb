@@ -2,9 +2,13 @@ class RecipesController < ApplicationController
 
     get '/recipes' do
         authentication_required
-        @recipes = Recipe.all
-        erb :"/recipes/index"
+        # @recipes = Recipe.all
+        @recipes = current_user.recipes
+        if @recipes.empty?
+            flash.now[:notice] = "You don't have any Recipe. Please create one from a New Recipe link."
+        end
 
+        erb :"/recipes/index"
     end
 
     get '/recipes/new' do
