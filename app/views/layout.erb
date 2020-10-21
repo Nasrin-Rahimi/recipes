@@ -26,7 +26,7 @@
           <span>Hello <%= current_user.username %>! </span> |
           <a href="/categories"> Recipe Categories </a> |
           <a href="/recipes/new">New Recipe</a> |
-          <a href="/recipes">Your Recipes</a> |
+          <a href="/<%= session[:username]%>/recipes">Your Recipes</a> |
           <a href="/logout" class="nav-item"> Logout </a>  |
         <% end %>
 
