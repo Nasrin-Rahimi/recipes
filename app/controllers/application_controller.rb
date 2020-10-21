@@ -33,6 +33,7 @@ class ApplicationController < Sinatra::Base
       if user && user.authenticate(password)
         session[:username] = user.username
       else
+        flash[:notice] = "Username or Password is invalid!"
         redirect '/login'
       end
     end
