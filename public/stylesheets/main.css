@@ -77,6 +77,10 @@
     text-align: center;
   }
 
+  .message{
+    color: red;
+  }
+
   h1 {
     font-size: 36px;
     line-height: 54px;

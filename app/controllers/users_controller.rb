@@ -5,9 +5,12 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        #check user fields validation, if fields are not valid, stay in signup page!
-        user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
-        redirect '/login'
+        @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+        if @user.valid?
+            redirect '/login'
+        else
+            erb :"/users/signup"
+        end
     end
 
     get '/login' do
@@ -25,9 +28,7 @@ class UsersController < ApplicationController
 
     get '/logout' do
         logout!
-        # redirect "/login"
         redirect "/"
     end
-
 
 end
