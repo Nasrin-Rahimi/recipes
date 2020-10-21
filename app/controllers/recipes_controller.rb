@@ -34,15 +34,13 @@ class RecipesController < ApplicationController
     end
 
     get '/recipes/:id/edit' do
-         #checking if they are logged in
          authentication_required
-        #find a recipe that only the creator user is allowed to edit
         @recipe = Recipe.find(params[:id])
-        if current_user.recipes.include?(@recipe)
-        # if @recipe = current_user.recipes.find_by(params[:id])
+        if current_user.recipes.include?(@recipe) 
             erb :"/recipes/edit"
         else 
-            redirect "/categories"
+            flash[:notice] = "Only the User that created the Recipe can edit it!"
+            redirect "/recipes/#{params[:id]}"
         end
     end
 
