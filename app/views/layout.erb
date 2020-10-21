@@ -33,12 +33,13 @@
 
       </nav>
       <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header>
-
-      <% flash.keys.each do |type| %>
-        <div data-alert class="flash <%= type %> alert-box radius">
-          <%= flash[type] %>
-        </div>
-      <% end %>
+      <p class="message">
+          <% flash.keys.each do |type| %>
+            <div data-alert class="flash <%= type %> alert-box radius">
+              <%= flash[type] %>
+            </div>
+          <% end %>
+      </p>
 
         <%= yield %>
       

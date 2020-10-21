@@ -2,6 +2,11 @@
 <h1>Login</h1>
 
 <form action="/login" method="POST">
+    <p class="message">
+        <% if @user!= nil %>
+        <%= @user.errors.full_messages %>
+        <% end %>
+    </p>
     <p>
         <label for="username">User Name:</label>
         <input type="text" name="username" id="username" />

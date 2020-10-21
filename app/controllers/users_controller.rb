@@ -18,8 +18,13 @@ class UsersController < ApplicationController
     end
 
     post '/login' do 
-       login(params[:username], params[:password])
-       redirect '/categories'
+        if params[:username].empty? || params[:password].empty?
+            flash[:notice] = "Please enter Username and Password!"
+            redirect 'login'
+        else
+            login(params[:username], params[:password])
+            redirect '/categories'
+        end
     end
 
     get "/failure" do
