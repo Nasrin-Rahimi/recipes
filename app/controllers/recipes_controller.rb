@@ -45,7 +45,8 @@ class RecipesController < ApplicationController
     end
 
     patch '/recipes/:id' do
-        if params[:name] == "" || params[:ingredients] == "" || params[:description] == ""
+        if params[:name].empty? || params[:ingredients].empty? || params[:description].empty?
+            flash[:notice] = "Please enter Recipe's Name, Ingredients and Description"
             redirect "/recipes/#{params[:id]}/edit"
         else
             recipe = Recipe.find(params[:id])
@@ -64,7 +65,8 @@ class RecipesController < ApplicationController
         if current_user.recipes.include?(recipe)
             recipe.delete
         end
-        redirect "/recipes"
+        flash[:notice] = "Only the User that created the Recipe can delete it!"
+        redirect "/recipes/#{params[:id]}"
     end
 
 end
