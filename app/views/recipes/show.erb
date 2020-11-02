@@ -1,7 +1,7 @@
 <h2> <%= @recipe.name %> </h2>
-<h3>Ingredients: <%= @recipe.ingredients %> </h3>
-<h3>Cook Time: <%= @recipe.cooktime %> </h3>
-<p>Description: <%= @recipe.description %> </p>
+<p><h3>Ingredients: </h3><%= @recipe.ingredients %></p> 
+<p><h3>Cook Time: </h3><%= @recipe.cooktime %></p> 
+<p><h3>Description: </h3><%= @recipe.description %> </p>
 
 
 <a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a><br><br>

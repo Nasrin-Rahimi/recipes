@@ -33,14 +33,13 @@
         
 
       </nav>
-      <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header>
-      <p class="message">
+      <header><img src="/images/persian_kebab.jpg" class="page-header-image"></header><br>
+      
           <% flash.keys.each do |type| %>
-            <div data-alert class="flash <%= type %> alert-box radius">
+            <div data-alert class="flash-message" style="color:red;height: 20px;">
               <%= flash[type] %>
             </div>
           <% end %>
-      </p>
 
         <%= yield %>
       
