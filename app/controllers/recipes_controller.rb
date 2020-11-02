@@ -34,6 +34,7 @@ class RecipesController < ApplicationController
             @categories = Category.all
             erb :"/recipes/new"
         end
+       
     end
 
     get '/recipes/:id' do
@@ -73,9 +74,11 @@ class RecipesController < ApplicationController
         recipe = Recipe.find(params[:id])
         if current_user.recipes.include?(recipe)
             recipe.delete
+            redirect "/categories"
+        else
+            flash[:notice] = "Only the User that created the Recipe can delete it!"
+            redirect "/recipes/#{params[:id]}"
         end
-        flash[:notice] = "Only the User that created the Recipe can delete it!"
-        redirect "/recipes/#{params[:id]}"
     end
 
 end
