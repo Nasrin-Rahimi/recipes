@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    @categories = Category.all
+    # @categories = Category.all
     erb :home
   end
 
