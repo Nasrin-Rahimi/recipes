@@ -23,6 +23,7 @@ class RecipesController < ApplicationController
     end
 
     post '/recipes' do 
+        authentication_required
         @recipe = Recipe.create(params["recipe"])
         if !params["category"]["name"].empty?
             @recipe.category = Category.create(name: params["category"]["name"])
@@ -55,17 +56,23 @@ class RecipesController < ApplicationController
     end
 
     patch '/recipes/:id' do
+        authentication_required
         if params[:name].empty? || params[:ingredients].empty? || params[:description].empty?
             flash[:notice] = "Please enter Recipe's Name, Ingredients and Description"
             redirect "/recipes/#{params[:id]}/edit"
         else
             recipe = Recipe.find(params[:id])
-            recipe.name = params[:name]
-            recipe.ingredients = params[:ingredients]
-            recipe.cooktime = params[:cooktime]
-            recipe.description = params[:description]
-            recipe.save
-            redirect "/recipes/#{params[:id]}"
+            if current_user.recipes.include?(recipe) 
+                recipe.name = params[:name]
+                recipe.ingredients = params[:ingredients]
+                recipe.cooktime = params[:cooktime]
+                recipe.description = params[:description]
+                recipe.save
+                redirect "/recipes/#{params[:id]}"
+            else
+                flash[:notice] = "You can not change this recipe!"
+                redirect '/login'
+            end
         end
     end
 
