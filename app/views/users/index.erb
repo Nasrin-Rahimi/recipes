@@ -1,0 +1,8 @@
+<h1>Users</h1>
+<ul>
+    <% @users.each do |user| %>
+    <h3>
+        <li><%= user.username %></li> has <%= user.recipes.count %> Recipes!
+    </h3>
+    <% end %>
+</ul>

@@ -36,4 +36,9 @@ class UsersController < ApplicationController
         redirect "/"
     end
 
+    get '/index' do
+        @users = User.all
+        erb :'/users/index'
+    end
+
 end
